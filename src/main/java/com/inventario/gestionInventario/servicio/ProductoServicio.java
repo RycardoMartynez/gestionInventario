@@ -40,13 +40,14 @@ public class ProductoServicio {
         // 3. Guardar y devolver el producto actualizado
         return productoRepositorio.save(productoExistente);
     }
-    // Método para eliminar un producto por ID
+    // Archivo: ProductoServicio.java (CÓDIGO CORREGIDO)
     public void eliminarProducto(Long id) {
-        // Verifica si existe antes de borrar (opcional, pero buena práctica)
+        // 1. Verifica si existe (y lanza error si no)
         Producto productoExistente = productoRepositorio.findById(id)
                 .orElseThrow(() -> new RecursoNoEncontradoException("Producto no encontrado con ID: " + id));
 
-        productoRepositorio.delete(productoExistente);
+        // 2. Ejecuta la eliminación sobre el Repositorio (SOLUCIÓN)
+        productoRepositorio.deleteById(id);
     }
     // Método para buscar un único producto por ID
     public Producto obtenerProductoPorId(Long id) {
